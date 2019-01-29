@@ -64,8 +64,8 @@ class PhotoPuzzle:
         photo_puzzle = Image.new(mode="RGB", size=(self.image.width // self.pix_to_tile * self.tile_size,
                                                    self.image.height // self.pix_to_tile * self.tile_size))
         self.tiles_mid_colors = []
-        for t in list(puzzle.load_tiles()):
-            self.tiles_mid_colors.append((t, puzzle.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
+        for t in list(self.load_tiles()):
+            self.tiles_mid_colors.append((t, self.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
 
         tiles_pos = []
         for x in range(0, self.image.width, self.pix_to_tile):
