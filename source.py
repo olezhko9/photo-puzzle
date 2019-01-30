@@ -1,33 +1,42 @@
 import sys
 import os
-from PyQt5 import QtWidgets, Qt
+from PyQt5 import QtWidgets
+from PyQt5.QtGui import QPixmap
 import design
 from PhotoPuzzle import PhotoPuzzle
+
 # command_to_convert
 # pyuic5 'D:\__main__\Python\photo puzzle\design.ui' -o 'D:\__main__\Python\photo puzzle\design.py'
+
 class PhotoPuzzleApp(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-        self.file_Button.clicked.connect(self.open_photo)
-        self.folder_Button.clicked.connect(self.choose_directory)
-        self.ren_Button.clicked.connect(self.run)
+        self.pictureButton.clicked.connect(self.open_photo)
+        self.directoryButton.clicked.connect(self.choose_directory)
+        self.runButton.clicked.connect(self.run)
 
     def open_photo(self):
-        fname = QtWidgets.QFileDialog.getOpenFileName(self, 'Выберите файл', 'c:\\', "Image files (*.jpg *.png)")
-        self.photo_path = fname[0]
-        self.file_Label.setText(self.photo_path)
-        self.label.setPixmap(Qt.QPixmap(self.photo_path))
+        self.photo_path = QtWidgets.QFileDialog.getOpenFileName(self, 'Выберите файл', 'c:\\', "Image files (*.jpg *.png)")[0]
+        qpix = QPixmap(self.photo_path)
+        photo_name = os.path.split(self.photo_path)[1]
+        self.pictureLabel.setText(photo_name)
+        self.pixmapLabel.setPixmap(qpix.scaledToWidth(self.pixmapLabel.width()))
+
 
     def choose_directory(self):
         self.directory = QtWidgets.QFileDialog.getExistingDirectory(self, "Выберите папку")
+        files_in_directory = len(os.listdir(self.directory))
+        self.directoryLabel.setText("Плиток: {0}".format(files_in_directory))
 
     def run(self):
         photo_path = os.path.abspath(self.photo_path)
         folder = os.path.abspath(self.directory)
         puzzle = PhotoPuzzle(photo_path, folder)
-        puzzle.create_photo_puzzle(pix_to_tile=2, njobs=-1)
+        pix_tile = int(self.pixelsTileLEdit.text())
+        process_num = int(self.processLEdit.text())
+        puzzle.create_photo_puzzle(pix_to_tile=pix_tile, njobs=process_num)
 
 
 def main():

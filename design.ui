@@ -6,116 +6,144 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>420</height>
+    <width>770</width>
+    <height>359</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>810</width>
-    <height>420</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>810</width>
-    <height>420</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="file_Button">
+   <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>40</y>
-      <width>130</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Открыть картинку</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="folder_Button">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>110</y>
-      <width>130</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Указать папку</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ren_Button">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>300</y>
-      <width>260</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Преобразовать</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="file_Label">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>40</y>
-      <width>150</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Имя файла</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="folde_Label">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>110</y>
-      <width>150</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Путь к папке</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>420</x>
+      <x>310</x>
       <y>10</y>
-      <width>360</width>
-      <height>360</height>
+      <width>451</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="pixmapLabel">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="runButton">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>230</y>
+      <width>271</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string/>
+     <string>Запустить</string>
     </property>
    </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>10</y>
+      <width>20</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>271</width>
+      <height>73</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="1">
+      <widget class="QLabel" name="directoryLabel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="directoryButton">
+       <property name="text">
+        <string>Папка с картинками</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QPushButton" name="pictureButton">
+       <property name="text">
+        <string>Выбрать картинку</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="pictureLabel">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>150</y>
+      <width>271</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Количество процессов</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLineEdit" name="pixelsTileLEdit"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="processLEdit"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Пикселей в ячейке</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>810</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
