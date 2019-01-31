@@ -11,6 +11,7 @@ class PhotoPuzzle:
         self.tiles_path = tiles_path
         self.pix_to_tile = 4
         self.tile_size = 32
+        self.progress = 0
 
     def load_tiles(self):
         return (os.path.join(self.tiles_path, f) for f in os.listdir(self.tiles_path) if 'jpg' in f)
@@ -64,8 +65,8 @@ class PhotoPuzzle:
         photo_puzzle = Image.new(mode="RGB", size=(self.image.width // self.pix_to_tile * self.tile_size,
                                                    self.image.height // self.pix_to_tile * self.tile_size))
         self.tiles_mid_colors = []
-        for t in list(puzzle.load_tiles()):
-            self.tiles_mid_colors.append((t, puzzle.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
+        for t in list(self.load_tiles()):
+            self.tiles_mid_colors.append((t, self.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
 
         tiles_pos = []
         for x in range(0, self.image.width, self.pix_to_tile):
@@ -85,7 +86,8 @@ class PhotoPuzzle:
                                                  y // self.pix_to_tile * self.tile_size,
                                                  x // self.pix_to_tile * self.tile_size + self.tile_size,
                                                  y // self.pix_to_tile * self.tile_size + self.tile_size))
-            print(str(round(idx / len(tiles_pos) * 100)) + "% completed")
+            self.progress = round(idx / len(tiles_pos) * 100)
+            # print(self.progress, "% completed")
         base, puzzle_name = os.path.split(self.image.filename)
         path_to_save = os.path.join(base, 'puzzle-{0}-{1}'.format(self.pix_to_tile, puzzle_name))
         photo_puzzle.save(path_to_save)

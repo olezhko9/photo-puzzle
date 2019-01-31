@@ -1,3 +1,5 @@
 .idea/*
 
 tiles/*.jpg
+
+__pycache__/*
