@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(770, 359)
+        MainWindow.resize(767, 360)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
@@ -21,7 +21,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.pixmapLabel = QtWidgets.QLabel(self.verticalLayoutWidget_2)
-        self.pixmapLabel.setText("")
+        self.pixmapLabel.setAlignment(QtCore.Qt.AlignCenter)
         self.pixmapLabel.setObjectName("pixmapLabel")
         self.verticalLayout_2.addWidget(self.pixmapLabel)
         self.runButton = QtWidgets.QPushButton(self.centralwidget)
@@ -74,6 +74,20 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        self.progressLayout = QtWidgets.QWidget(self.centralwidget)
+        self.progressLayout.setEnabled(True)
+        self.progressLayout.setGeometry(QtCore.QRect(20, 300, 271, 42))
+        self.progressLayout.setObjectName("progressLayout")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.progressLayout)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.label = QtWidgets.QLabel(self.progressLayout)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.progressBar = QtWidgets.QProgressBar(self.progressLayout)
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName("progressBar")
+        self.verticalLayout.addWidget(self.progressBar)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -82,9 +96,11 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.pixmapLabel.setText(_translate("MainWindow", "Выбранное изображение"))
         self.runButton.setText(_translate("MainWindow", "Запустить"))
         self.directoryButton.setText(_translate("MainWindow", "Папка с картинками"))
         self.pictureButton.setText(_translate("MainWindow", "Выбрать картинку"))
         self.label_4.setText(_translate("MainWindow", "Количество процессов"))
         self.label_3.setText(_translate("MainWindow", "Пикселей в ячейке"))
+        self.label.setText(_translate("MainWindow", "Прогресс выполнения"))
 
