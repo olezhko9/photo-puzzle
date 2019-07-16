@@ -52,8 +52,12 @@ class PhotoPuzzleApp(QMainWindow, design.Ui_MainWindow):
         self.progressLayout.show()
         photo_path = os.path.abspath(self.photo_path)
         folder = os.path.abspath(self.directory)
+        # photo_path = os.path.abspath('frog.png')
+        # folder = os.path.abspath('tiles/')
         pix_tile = int(self.pixelsTileLEdit.text())
         process_num = int(self.processLEdit.text())
+        # pix_tile = 4
+        # process_num = -1
 
         self.puzzleWorker = PuzzleWorker(photo_path, folder, pix_tile, process_num)
         self.puzzleWorker.start()

@@ -1,5 +1,12 @@
-.idea/*
+.idea
 
-tiles/*.jpg
+# folders with images
+tiles
+uploads
 
-__pycache__/*
+# python
+__pycache__
+main.py
+
+# vue
+client
