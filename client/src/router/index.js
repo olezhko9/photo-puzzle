@@ -14,7 +14,7 @@ export default new Router({
       path: '/mosaic',
       name: 'Mosaic',
       component: Mosaic
-    },
+    }
   ],
   mode: 'history'
 })
