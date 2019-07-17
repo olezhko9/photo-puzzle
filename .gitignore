@@ -6,7 +6,3 @@ uploads
 
 # python
 __pycache__
-main.py
-
-# vue
-client
