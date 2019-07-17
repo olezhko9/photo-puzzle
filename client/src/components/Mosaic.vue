@@ -19,16 +19,21 @@
         </b-upload>
       </b-field>
 
-        <div v-if="file" class="control">
-          <b-tag
-            type="is-primary"
-            size="is-medium"
-            @close="clearAll"
-            attached closable>
-            {{ file.name }}
-          </b-tag>
-          <b-button type="is-primary" @click="uploadImage">Отправить</b-button>
-        </div>
+      <div v-if="file" class="control">
+        <b-tag
+          type="is-primary"
+          size="is-medium"
+          @close="clearAll"
+          attached closable>
+          {{ file.name }}
+        </b-tag>
+        <b-button
+          type="is-primary"
+          :class="{'is-loading': uploading}"
+          @click="uploadImage">
+          Отправить
+        </b-button>
+      </div>
     </div>
 
       <div class="column" id="preview">
@@ -48,7 +53,8 @@ export default {
     return {
       file: null,
       url: '',
-      mosaicUrl: ''
+      mosaicUrl: '',
+      uploading: false
     }
   },
 
@@ -59,6 +65,8 @@ export default {
     },
 
     uploadImage () {
+      this.uploading = true
+      console.log(this.uploading)
       let formData = new FormData()
       formData.append('file', this.file)
       axios.post('http://127.0.0.1:5000/upload', formData, {
@@ -67,6 +75,7 @@ export default {
         }
       }).then(res => {
         this.mosaicUrl = 'http://127.0.0.1:5000/download/' + res.data.filename
+        this.uploading = false
       })
     },
 
