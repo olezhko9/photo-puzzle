@@ -1,44 +1,61 @@
 <template>
   <div class="container">
     <div class="columns">
-      <div class="column">
+      <div class="column is-one-quarter">
         <b-field>
-        <b-upload v-model="file" class="is-info" drag-drop @input="onFileChange">
-          <section class="section">
-            <div class="has-text-centered">
-              <p>
-                <b-icon
-                  icon="upload"
-                  size="is-large">
-                </b-icon>
-               </p>
-               <p>Перетащите сюда файл,</p>
-               <p>который хотите обработать</p>
-            </div>
-          </section>
-        </b-upload>
-      </b-field>
+          <b-upload
+            v-model="file"
+            type="is-primary"
+            @input="onFileChange"
+            accept="image/*"
+            drag-drop>
+            <section class="section">
+              <div class="has-text-centered">
+                <p>
+                  <b-icon
+                    icon="upload"
+                    size="is-large">
+                  </b-icon>
+                </p>
+                <p>Перетащите сюда файл, который хотите обработать</p>
+              </div>
+            </section>
+          </b-upload>
+        </b-field>
 
-      <div v-if="file" class="control">
-        <b-tag
-          type="is-primary"
-          size="is-medium"
-          @close="clearAll"
-          attached closable>
-          {{ file.name }}
-        </b-tag>
-        <b-button
-          type="is-primary"
-          :class="{'is-loading': uploading}"
-          @click="uploadImage">
-          Отправить
-        </b-button>
+        <div v-if="file">
+          <b-tag
+            v-if="file"
+            type="is-primary"
+            size="is-medium"
+            @close="clearAll"
+            attached closable>
+            {{ file.name }}
+          </b-tag>
+          <b-button
+            type="is-primary"
+            :class="{'is-loading': uploading}"
+            @click="uploadImage">
+            Отправить
+          </b-button>
+        </div>
+       </div>
+
+      <div class="column preview">
+        <photo-viewer title="Оригинальная картинка" :img="url">
+          <template slot="actions">
+            <a href="#" class="card-footer-item">Close</a>
+          </template>
+        </photo-viewer>
       </div>
-    </div>
 
-      <div class="column" id="preview">
-        <img v-if="url" :src="url" />
-        <img v-if="mosaicUrl" :src="mosaicUrl">
+      <div class="column preview">
+        <photo-viewer title="После обработки" :img="mosaicUrl">
+          <template slot="actions">
+            <a :href="mosaicUrl" target="_blank" class="card-footer-item">Open in new tab</a>
+            <a href="#" class="card-footer-item">Save</a>
+          </template>
+        </photo-viewer>
       </div>
     </div>
   </div>
@@ -46,9 +63,13 @@
 
 <script>
 import axios from 'axios'
+import PhotoViewer from '@/components/PhotoViewer'
 
 export default {
   name: 'Mosaic',
+  components: {
+    'photo-viewer': PhotoViewer
+  },
   data () {
     return {
       file: null,
@@ -66,7 +87,6 @@ export default {
 
     uploadImage () {
       this.uploading = true
-      console.log(this.uploading)
       let formData = new FormData()
       formData.append('file', this.file)
       axios.post('http://127.0.0.1:5000/upload', formData, {
@@ -88,15 +108,9 @@ export default {
 }
 </script>
 
-<style scoped>
-#preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#preview img {
-  max-width: 100%;
-  max-height: 500px;
-}
+<style itemscope>
+  .preview img {
+    max-width: 100%;
+    max-height: 720px;
+  }
 </style>
