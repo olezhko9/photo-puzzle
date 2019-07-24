@@ -1,61 +1,53 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="columns">
-      <div class="column is-one-quarter">
-        <b-field>
-          <b-upload
-            v-model="file"
-            type="is-primary"
-            @input="onFileChange"
-            accept="image/*"
-            drag-drop>
-            <section class="section">
-              <div class="has-text-centered">
-                <p>
-                  <b-icon
-                    icon="upload"
-                    size="is-large">
-                  </b-icon>
-                </p>
-                <p>Перетащите сюда файл, который хотите обработать</p>
-              </div>
-            </section>
-          </b-upload>
-        </b-field>
-
-        <div v-if="file">
-          <b-tag
-            v-if="file"
-            type="is-primary"
-            size="is-medium"
-            @close="clearAll"
-            attached closable>
-            {{ file.name }}
-          </b-tag>
-          <b-button
-            type="is-primary"
-            :class="{'is-loading': uploading}"
-            @click="uploadImage">
-            Отправить
-          </b-button>
-        </div>
-       </div>
 
       <div class="column preview">
-        <photo-viewer title="Оригинальная картинка" :img="url">
-          <template slot="actions">
-            <a href="#" class="card-footer-item">Close</a>
+        <photo-card title="До обработки" :img="originalUrl" @imageLoaded="getUserImageHeight">
+          <template slot="no-image">
+            <b-field>
+              <b-upload
+                v-model="file"
+                type="is-primary"
+                @input="onFileChange"
+                accept="image/*"
+                :style="{height: fixedHeight + 'px', 'max-height': fixedHeight + 'px'}"
+                drag-drop>
+                <section class="section">
+                  <div class="has-text-centered upload-cta">
+                    <p>
+                      <b-icon
+                        icon="upload"
+                        size="is-large">
+                      </b-icon>
+                    </p>
+                    <p>Перетащите сюда файл,   который хотите обработать,</p>
+                    <p>или нажмите, чтобы выбрать</p>
+                  </div>
+                </section>
+              </b-upload>
+            </b-field>
           </template>
-        </photo-viewer>
+          <template slot="actions">
+            <a class="card-footer-item" @click="reset">Close</a>
+            <a class="card-footer-item" @click="uploadImage">Make mosaic</a>
+          </template>
+        </photo-card>
       </div>
 
       <div class="column preview">
-        <photo-viewer title="После обработки" :img="mosaicUrl">
+        <photo-card title="После обработки" :img="mosaicUrl" :maxHeight="fixedHeight">
+          <template slot="no-image">
+            <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081"
+                 alt="Placeholder image"
+                 :height="fixedHeight" :width="fixedHeight"
+            >
+          </template>
           <template slot="actions">
             <a :href="mosaicUrl" target="_blank" class="card-footer-item">Open in new tab</a>
             <a href="#" class="card-footer-item">Save</a>
           </template>
-        </photo-viewer>
+        </photo-card>
       </div>
     </div>
   </div>
@@ -63,30 +55,29 @@
 
 <script>
 import axios from 'axios'
-import PhotoViewer from '@/components/PhotoViewer'
+import PhotoCard from '@/components/PhotoCard'
 
 export default {
   name: 'Mosaic',
   components: {
-    'photo-viewer': PhotoViewer
+    'photo-card': PhotoCard
   },
   data () {
     return {
       file: null,
-      url: '',
+      originalUrl: '',
       mosaicUrl: '',
-      uploading: false
+      fixedHeight: 500
     }
   },
 
   methods: {
     onFileChange (e) {
-      this.url = URL.createObjectURL(this.file)
+      this.originalUrl = URL.createObjectURL(this.file)
       this.mosaicUrl = ''
     },
 
     uploadImage () {
-      this.uploading = true
       let formData = new FormData()
       formData.append('file', this.file)
       axios.post('http://127.0.0.1:5000/upload', formData, {
@@ -95,14 +86,19 @@ export default {
         }
       }).then(res => {
         this.mosaicUrl = 'http://127.0.0.1:5000/download/' + res.data.filename
-        this.uploading = false
       })
     },
 
-    clearAll () {
+    reset () {
       this.file = null
-      this.url = ''
+      this.originalUrl = ''
       this.mosaicUrl = ''
+      this.fixedHeight = 500
+    },
+
+    getUserImageHeight () {
+      const image = document.querySelector('.user-image')
+      this.fixedHeight = image.height
     }
   }
 }
@@ -110,7 +106,20 @@ export default {
 
 <style itemscope>
   .preview img {
-    max-width: 100%;
-    max-height: 720px;
+    max-height: 600px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .upload {
+    width: 100%;
+  }
+
+  .upload-draggable {
+    width: 100%;
+  }
+
+  .upload-cta {
+    margin: 15% 0;
   }
 </style>
