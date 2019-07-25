@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, send_from_directory, jsonify
+from flask import Flask, request, redirect, send_from_directory, jsonify, send_file
 from werkzeug import secure_filename
 from mosaic.PhotoPuzzle import PhotoPuzzle
 from flask_cors import CORS
@@ -19,7 +19,7 @@ def hello_world():
 
 @app.route('/download/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
-	return send_from_directory(UPLOAD_DIR, filename)
+	return send_file(UPLOAD_DIR + filename, as_attachment=True)
 
 
 @app.route('/upload', methods=['POST'])
@@ -36,7 +36,6 @@ def upload_file():
 			folder = os.path.abspath('mosaic/tiles/')
 			puzzle = PhotoPuzzle(photo_path, folder)
 			saved_file = puzzle.create_photo_puzzle(pix_to_tile=8, njobs=-1).split('\\')[-1]
-			# return '<a href="/download/' + saved_file + '" download>Скачать</a>'
 			response = {'filename': saved_file}
 			return jsonify(response)
 

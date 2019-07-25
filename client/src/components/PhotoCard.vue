@@ -12,6 +12,7 @@
           :src="img"
           @load="onImageLoaded"
           :style="{'max-height': maxHeight + 'px'}"
+          crossorigin="anonymous"
           class="user-image" />
         <slot name="no-image" v-else />
       </div>

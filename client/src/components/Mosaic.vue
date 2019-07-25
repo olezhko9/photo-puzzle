@@ -45,7 +45,7 @@
           </template>
           <template slot="actions">
             <a :href="mosaicUrl" target="_blank" class="card-footer-item">Open in new tab</a>
-            <a href="#" class="card-footer-item">Save</a>
+            <a :href="mosaicUrl" class="card-footer-item" :download="mosaicUrl">Download</a>
           </template>
         </photo-card>
       </div>
