@@ -42,6 +42,7 @@
                  alt="Placeholder image"
                  :height="fixedHeight" :width="fixedHeight"
             >
+            <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
           </template>
           <template slot="actions">
             <a :href="mosaicUrl" target="_blank" class="card-footer-item">Open in new tab</a>
@@ -67,7 +68,8 @@ export default {
       file: null,
       originalUrl: '',
       mosaicUrl: '',
-      fixedHeight: 500
+      fixedHeight: 500,
+      isLoading: false
     }
   },
 
@@ -78,6 +80,7 @@ export default {
     },
 
     uploadImage () {
+      this.isLoading = true
       let formData = new FormData()
       formData.append('file', this.file)
       axios.post('http://127.0.0.1:5000/upload', formData, {
@@ -86,6 +89,8 @@ export default {
         }
       }).then(res => {
         this.mosaicUrl = 'http://127.0.0.1:5000/download/' + res.data.filename
+      }).finally(() => {
+        this.isLoading = false
       })
     },
 
