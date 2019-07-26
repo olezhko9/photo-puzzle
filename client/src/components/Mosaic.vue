@@ -83,12 +83,13 @@ export default {
       this.isLoading = true
       let formData = new FormData()
       formData.append('file', this.file)
-      axios.post('http://127.0.0.1:5000/upload', formData, {
+
+      axios.post(process.env.SERVER_HOST + '/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then(res => {
-        this.mosaicUrl = 'http://127.0.0.1:5000/download/' + res.data.filename
+        this.mosaicUrl = process.env.SERVER_HOST + '/download/' + res.data.filename
       }).finally(() => {
         this.isLoading = false
       })
