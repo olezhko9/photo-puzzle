@@ -6,7 +6,7 @@
           {{ title }}
         </p>
       </header>
-      <div class="card-image">
+      <div class="card-image" :style="{'height': maxHeight + 'px'}">
         <img
           v-if="img"
           :src="img"
@@ -15,6 +15,9 @@
           crossorigin="anonymous"
           class="user-image" />
         <slot name="no-image" v-else />
+      </div>
+      <div class="card-content">
+        <p class="title is-5 has-text-centered">{{ filename }}</p>
       </div>
       <footer class="card-footer">
         <slot name="actions"/>
@@ -29,7 +32,8 @@ export default {
   props: {
     title: String,
     img: String,
-    maxHeight: Number
+    maxHeight: Number,
+    filename: String
   },
 
   methods: {
@@ -43,5 +47,21 @@ export default {
 <style scoped>
   .card-image {
     margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+
+  .card-image > .field {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-content > p {
+    height: 22px;
+  }
+
+  footer.card-footer > a, footer.card-footer > button {
+    height: 100%;
   }
 </style>

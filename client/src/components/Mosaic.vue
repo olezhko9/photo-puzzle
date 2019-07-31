@@ -1,9 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <div class="columns">
-
       <div class="column preview">
-        <photo-card title="До обработки" :img="originalUrl" @imageLoaded="getUserImageHeight">
+        <photo-card title="До обработки" :img="originalUrl" :filename="file.name" :maxHeight="fixedHeight" @imageLoaded="getUserImageHeight">
           <template slot="no-image">
             <b-field>
               <b-upload
@@ -11,7 +10,6 @@
                 type="is-primary"
                 @input="onFileChange"
                 accept="image/*"
-                :style="{height: fixedHeight + 'px', 'max-height': fixedHeight + 'px'}"
                 drag-drop>
                 <section class="section">
                   <div class="has-text-centered upload-cta">
@@ -29,24 +27,48 @@
             </b-field>
           </template>
           <template slot="actions">
-            <a class="card-footer-item" @click="reset">Close</a>
-            <a class="card-footer-item" @click="uploadImage">Make mosaic</a>
+            <b-button
+              type="is-info"
+              class="card-footer-item"
+              @click="reset">
+              Закрыть
+            </b-button>
+            <b-button
+              type="is-info"
+              class="card-footer-item"
+              @click="uploadImage"
+              :disabled="!originalUrl">
+              Обработать
+            </b-button>
           </template>
         </photo-card>
       </div>
 
       <div class="column preview">
-        <photo-card title="После обработки" :img="mosaicUrl" :maxHeight="fixedHeight">
+        <photo-card title="После обработки" :img="mosaicUrl" :filename="filename" :maxHeight="fixedHeight">
           <template slot="no-image">
             <img src="https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081"
                  alt="Placeholder image"
-                 :height="fixedHeight" :width="fixedHeight"
             >
             <b-loading :is-full-page="true" :active.sync="isLoading"></b-loading>
           </template>
           <template slot="actions">
-            <a :href="mosaicUrl" target="_blank" class="card-footer-item">Open in new tab</a>
-            <a :href="mosaicUrl" class="card-footer-item" :download="mosaicUrl">Download</a>
+            <b-button
+              type="is-info"
+              class="card-footer-item"
+              :disabled="!mosaicUrl"
+              @click.prevent="downloadImage(mosaicUrl)">
+              Скачать
+            </b-button>
+            <b-button
+              type="is-info"
+              class="card-footer-item"
+              :disabled="!mosaicUrl"
+              tag="a"
+              target="_blank"
+              :href="mosaicUrl">
+              Открыть в новой вкладке
+            </b-button>
           </template>
         </photo-card>
       </div>
@@ -65,7 +87,10 @@ export default {
   },
   data () {
     return {
-      file: null,
+      file: {
+        name: ''
+      },
+      filename: '',
       originalUrl: '',
       mosaicUrl: '',
       fixedHeight: 500,
@@ -89,16 +114,33 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }).then(res => {
+        this.filename = res.data.filename
         this.mosaicUrl = process.env.SERVER_HOST + '/download/' + res.data.filename
       }).finally(() => {
         this.isLoading = false
       })
     },
 
+    downloadImage (url) {
+      axios.get(url, { responseType: 'arraybuffer' })
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          link.setAttribute('download', this.filename)
+          document.body.appendChild(link)
+          link.click()
+          document.body.removeChild(link)
+        })
+    },
+
     reset () {
-      this.file = null
+      this.file = {
+        name: ''
+      }
       this.originalUrl = ''
       this.mosaicUrl = ''
+      this.filename = ''
       this.fixedHeight = 500
     },
 
@@ -110,15 +152,16 @@ export default {
 }
 </script>
 
-<style itemscope>
+<style>
   .preview img {
-    max-height: 600px;
+    max-height: 100%;
     margin: 0 auto;
     display: block;
   }
 
   .upload {
     width: 100%;
+    height: 100%;
   }
 
   .upload-draggable {
@@ -126,6 +169,6 @@ export default {
   }
 
   .upload-cta {
-    margin: 15% 0;
+    margin: 20% 0;
   }
 </style>
