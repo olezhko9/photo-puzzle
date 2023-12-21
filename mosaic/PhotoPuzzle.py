@@ -14,7 +14,10 @@ class PhotoPuzzle:
         self.progress = 0
 
     def load_tiles(self):
-        return (os.path.join(self.tiles_path, f) for f in os.listdir(self.tiles_path) if 'jpg' in f)
+        return (
+            os.path.join(self.tiles_path, f) for f in os.listdir(self.tiles_path)
+            if f.endswith('png') or f.endswith('jpg')
+        )
 
     def show_source_img(self):
         self.image.show()
@@ -40,7 +43,7 @@ class PhotoPuzzle:
         return rgb
 
     def distance_between_colors(self, color_1, color_2):
-        return sum(map(lambda x, y: (y-x)**2, color_1, color_2))
+        return sum(map(lambda x, y: (y - x) ** 2, color_1, color_2))
 
     def find_best_tile(self, pix):
         min_distance = 3 * 256 ** 2
@@ -66,7 +69,8 @@ class PhotoPuzzle:
                                                    self.image.height // self.pix_to_tile * self.tile_size))
         self.tiles_mid_colors = []
         for t in list(self.load_tiles()):
-            self.tiles_mid_colors.append((t, self.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
+            self.tiles_mid_colors.append(
+                (t, self.get_img_mid_color(Image.open(t), 0, 0, self.tile_size, self.tile_size)))
 
         tiles_pos = []
         for x in range(0, self.image.width, self.pix_to_tile):
