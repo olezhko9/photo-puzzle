@@ -1,7 +1,7 @@
 .idea
 
 # folders with images
-tiles
+mosaic/tiles
 uploads
 
 # python
