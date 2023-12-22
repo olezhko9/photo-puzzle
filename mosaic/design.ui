@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
+    <width>880</width>
     <height>380</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>770</width>
+    <width>1000</width>
     <height>380</height>
    </size>
   </property>
@@ -29,7 +29,7 @@
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>420</x>
       <y>10</y>
       <width>451</width>
       <height>341</height>
@@ -56,7 +56,7 @@
      <rect>
       <x>20</x>
       <y>230</y>
-      <width>271</width>
+      <width>381</width>
       <height>31</height>
      </rect>
     </property>
@@ -67,7 +67,7 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>400</x>
       <y>10</y>
       <width>20</width>
       <height>341</height>
@@ -82,7 +82,7 @@
      <rect>
       <x>20</x>
       <y>30</y>
-      <width>271</width>
+      <width>381</width>
       <height>73</height>
      </rect>
     </property>
@@ -128,15 +128,15 @@
      <rect>
       <x>20</x>
       <y>150</y>
-      <width>271</width>
+      <width>381</width>
       <height>71</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="1">
-      <widget class="QLabel" name="label_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Количество процессов</string>
+        <string>Пикселей в ячейке</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -157,10 +157,10 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_3">
+     <item row="0" column="1">
+      <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Пикселей в ячейке</string>
+        <string>Количество процессов</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -176,8 +176,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>290</y>
-      <width>271</width>
+      <y>280</y>
+      <width>381</width>
       <height>61</height>
      </rect>
     </property>
@@ -191,6 +191,9 @@
      </item>
      <item>
       <widget class="QProgressBar" name="progressBar">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="value">
         <number>0</number>
        </property>
@@ -204,8 +207,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>770</width>
-     <height>21</height>
+     <width>880</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>

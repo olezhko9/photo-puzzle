@@ -1,23 +1,25 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'D:\__main__\Python\photo puzzle\design.ui'
+# Form implementation generated from reading ui file './design.ui'
 #
-# Created by: PyQt5 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(770, 380)
+        MainWindow.resize(880, 380)
         MainWindow.setMinimumSize(QtCore.QSize(770, 380))
-        MainWindow.setMaximumSize(QtCore.QSize(770, 380))
+        MainWindow.setMaximumSize(QtCore.QSize(1000, 380))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(310, 10, 451, 341))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(420, 10, 451, 341))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -27,15 +29,15 @@ class Ui_MainWindow(object):
         self.pixmapLabel.setObjectName("pixmapLabel")
         self.verticalLayout_2.addWidget(self.pixmapLabel)
         self.runButton = QtWidgets.QPushButton(self.centralwidget)
-        self.runButton.setGeometry(QtCore.QRect(20, 230, 271, 31))
+        self.runButton.setGeometry(QtCore.QRect(20, 230, 381, 31))
         self.runButton.setObjectName("runButton")
         self.line = QtWidgets.QFrame(self.centralwidget)
-        self.line.setGeometry(QtCore.QRect(290, 10, 20, 341))
+        self.line.setGeometry(QtCore.QRect(400, 10, 20, 341))
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.layoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 30, 271, 73))
+        self.layoutWidget.setGeometry(QtCore.QRect(20, 30, 381, 73))
         self.layoutWidget.setObjectName("layoutWidget")
         self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
@@ -57,28 +59,28 @@ class Ui_MainWindow(object):
         self.pictureLabel.setObjectName("pictureLabel")
         self.gridLayout.addWidget(self.pictureLabel, 0, 1, 1, 1)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(20, 150, 271, 71))
+        self.layoutWidget1.setGeometry(QtCore.QRect(20, 150, 381, 71))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.formLayout = QtWidgets.QFormLayout(self.layoutWidget1)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.formLayout.setObjectName("formLayout")
-        self.label_4 = QtWidgets.QLabel(self.layoutWidget1)
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setObjectName("label_4")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.label_4)
+        self.label_3 = QtWidgets.QLabel(self.layoutWidget1)
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_3.setObjectName("label_3")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
         self.pixelsTileLEdit = QtWidgets.QLineEdit(self.layoutWidget1)
         self.pixelsTileLEdit.setObjectName("pixelsTileLEdit")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.pixelsTileLEdit)
         self.processLEdit = QtWidgets.QLineEdit(self.layoutWidget1)
         self.processLEdit.setObjectName("processLEdit")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.processLEdit)
-        self.label_3 = QtWidgets.QLabel(self.layoutWidget1)
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_3.setObjectName("label_3")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_3)
+        self.label_4 = QtWidgets.QLabel(self.layoutWidget1)
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.label_4)
         self.progressLayout = QtWidgets.QWidget(self.centralwidget)
         self.progressLayout.setEnabled(True)
-        self.progressLayout.setGeometry(QtCore.QRect(20, 290, 271, 61))
+        self.progressLayout.setGeometry(QtCore.QRect(20, 280, 381, 61))
         self.progressLayout.setObjectName("progressLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.progressLayout)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -87,12 +89,13 @@ class Ui_MainWindow(object):
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.progressBar = QtWidgets.QProgressBar(self.progressLayout)
+        self.progressBar.setEnabled(True)
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName("progressBar")
         self.verticalLayout.addWidget(self.progressBar)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 770, 21))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 880, 26))
         self.menuBar.setObjectName("menuBar")
         MainWindow.setMenuBar(self.menuBar)
 
@@ -107,9 +110,8 @@ class Ui_MainWindow(object):
         self.runButton.setText(_translate("MainWindow", "Запустить"))
         self.directoryButton.setText(_translate("MainWindow", "Папка с картинками"))
         self.pictureButton.setText(_translate("MainWindow", "Выбрать картинку"))
-        self.label_4.setText(_translate("MainWindow", "Количество процессов"))
+        self.label_3.setText(_translate("MainWindow", "Пикселей в ячейке"))
         self.pixelsTileLEdit.setToolTip(_translate("MainWindow", "<html><head/><body><p>Число пикселей, которые будут заменены на картинку</p></body></html>"))
         self.processLEdit.setToolTip(_translate("MainWindow", "<html><head/><body><p>Количество процессов, на которых будет запущена программа</p></body></html>"))
-        self.label_3.setText(_translate("MainWindow", "Пикселей в ячейке"))
+        self.label_4.setText(_translate("MainWindow", "Количество процессов"))
         self.label.setText(_translate("MainWindow", "Прогресс выполнения"))
-
